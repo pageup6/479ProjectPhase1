@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieModel>
+﻿@model IEnumerable<UserModel>
 
 @* Generated from Custom Template. *@
 @* Model namespace using directive should be added to _ViewImports.cshtml. *@
@@ -7,7 +7,7 @@
     var containerDivClass = "container";
 }
 @{
-    ViewData["Title"] = "Movie List";
+    ViewData["Title"] = "User List";
 }
 
 <div class="@containerDivClass">
@@ -36,16 +36,16 @@
                 <thead class="table-secondary">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Name)
+                            @Html.DisplayNameFor(model => model.UserName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ReleaseDate)
+                            @Html.DisplayNameFor(model => model.Password)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.TotalRevenue)
+                            @Html.DisplayNameFor(model => model.IsActive)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Name)
+                            @Html.DisplayNameFor(model => model.RoleName)
                         </th>
                         <th></th>
                     </tr>
@@ -54,16 +54,16 @@
 		            @foreach (var item in Model) {
 				        <tr>
 					        <td>
-						        @Html.DisplayFor(modelItem => item.Name)
+						        @Html.DisplayFor(modelItem => item.UserName)
 					        </td>
 					        <td>
-						        @Html.DisplayFor(modelItem => item.ReleaseDate)
+						        @Html.DisplayFor(modelItem => item.Password)
 					        </td>
 					        <td>
-						        @Html.DisplayFor(modelItem => item.TotalRevenue)
+						        @Html.DisplayFor(modelItem => item.IsActive)
 					        </td>
 					        <td>
-						        @Html.DisplayFor(modelItem => item.Director)
+						        @Html.DisplayFor(modelItem => item.RoleName)
 					        </td>
 					        <td class="text-end w-25">
 						        <a asp-action="Details" asp-route-id="@item.Record.Id">Details</a>&nbsp;|&nbsp;

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieModel>
+﻿@model IEnumerable<MovieGenreModel>
 
 @* Generated from Custom Template. *@
 @* Model namespace using directive should be added to _ViewImports.cshtml. *@
@@ -7,7 +7,7 @@
     var containerDivClass = "container";
 }
 @{
-    ViewData["Title"] = "Movie List";
+    ViewData["Title"] = "MovieGenre List";
 }
 
 <div class="@containerDivClass">
@@ -36,16 +36,10 @@
                 <thead class="table-secondary">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Name)
+                            @Html.DisplayNameFor(model => model.MovieName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ReleaseDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TotalRevenue)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Name)
+                            @Html.DisplayNameFor(model => model.GenreName)
                         </th>
                         <th></th>
                     </tr>
@@ -54,16 +48,10 @@
 		            @foreach (var item in Model) {
 				        <tr>
 					        <td>
-						        @Html.DisplayFor(modelItem => item.Name)
+						        @Html.DisplayFor(modelItem => item.MovieId)
 					        </td>
 					        <td>
-						        @Html.DisplayFor(modelItem => item.ReleaseDate)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.TotalRevenue)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.Director)
+						        @Html.DisplayFor(modelItem => item.GenreId)
 					        </td>
 					        <td class="text-end w-25">
 						        <a asp-action="Details" asp-route-id="@item.Record.Id">Details</a>&nbsp;|&nbsp;

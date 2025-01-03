@@ -1,4 +1,4 @@
-﻿@model MovieModel
+﻿@model MovieGenreModel
 
 @* Generated from Custom Template. *@
 @* Model namespace using directive should be added to _ViewImports.cshtml. *@
@@ -7,8 +7,7 @@
     var containerDivClass = "container";
 }
 @{
-    ViewData["Title"] = "Movie Details";
-
+    ViewData["Title"] = "MovieGenre Details";
 }
 
 <div class="@containerDivClass">
@@ -27,34 +26,18 @@
     }
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.MovieName)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.MovieName)
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
+            @Html.DisplayNameFor(model => model.MovieId)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.TotalRevenue)
-        </div>
-        <div class="col-10">
-            @Html.DisplayFor(model => model.TotalRevenue)
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Director)
-        </div>
-        <div class="col-10">
-            @Html.DisplayFor(model => model.Director)
+            @Html.DisplayFor(model => model.GenreId)
         </div>
     </div>
 

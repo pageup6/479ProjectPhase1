@@ -1,4 +1,4 @@
-﻿@model MovieModel
+﻿@model MovieGenreModel
 
 @* Generated from Custom Template. *@
 @* Model namespace using directive should be added to _ViewImports.cshtml. *@
@@ -7,8 +7,7 @@
     var containerDivClass = "container";
 }
 @{
-    ViewData["Title"] = "Movie Details";
-
+    ViewData["Title"] = "MovieGenre Delete";
 }
 
 <div class="@containerDivClass">
@@ -25,36 +24,22 @@
         @TempData["Message"]
     </p>
     }
+    <h3 class="text-danger">Are you sure you want to delete?</h3>
+    <hr />
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.MovieName)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.MovieName)
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
+            @Html.DisplayNameFor(model => model.MovieId)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.TotalRevenue)
-        </div>
-        <div class="col-10">
-            @Html.DisplayFor(model => model.TotalRevenue)
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Director)
-        </div>
-        <div class="col-10">
-            @Html.DisplayFor(model => model.Director)
+            @Html.DisplayFor(model => model.GenreId)
         </div>
     </div>
 
@@ -70,9 +55,12 @@
     </div>
     *@
 
-    <hr /> 
-    <a asp-action="Edit" asp-route-id="@Model.Record.Id">Edit</a>&nbsp;|&nbsp;
-    <a asp-action="Delete" asp-route-id="@Model.Record.Id">Delete</a>&nbsp;|&nbsp;
-    <a asp-action="Index">Back to List</a>
+    <hr />
+    <form asp-action="Delete">
+	    @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Record.Id" />
+        <input type="submit" value="Yes" class="btn btn-danger" />&nbsp;&nbsp;
+        <a asp-action="Index" class="btn btn-outline-danger">No</a>
+    </form>
 </div>
 }

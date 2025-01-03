@@ -10,127 +10,130 @@ using BLL.Services.Bases;
 
 namespace MVC.Controllers
 {
-    public class MoviesController : MvcController
+    public class MovieGenresController : MvcController
     {
         // Service injections:
+        private readonly IService<MovieGenre, MovieGenreModel> _movieGenreService;
+        private readonly IService<Genre, GenreModel> _genreService;
         private readonly IService<Movie, MovieModel> _movieService;
-        private readonly IService<Director, DirectorModel> _directorService;
 
         /* Can be uncommented and used for many to many relationships. ManyToManyRecord may be replaced with the related entiy name in the controller and views. */
         //private readonly IManyToManyRecordService _ManyToManyRecordService;
 
-        public MoviesController(
-            IService<Movie, MovieModel> movieService
-            , IService<Director, DirectorModel> directorService
+        public MovieGenresController(
+            IService<MovieGenre, MovieGenreModel> movieGenreService
+            , IService<Genre, GenreModel> genreService
+            , IService<Movie, MovieModel> movieService
 
-            /* Can be uncommented and used for many to many relationships. ManyToManyRecord may be replaced with the related entiy name in the controller and views. */
-            //, IManyToManyRecordService ManyToManyRecordService
+        /* Can be uncommented and used for many to many relationships. ManyToManyRecord may be replaced with the related entiy name in the controller and views. */
+        //, IManyToManyRecordService ManyToManyRecordService
         )
         {
+            _movieGenreService = movieGenreService;
+            _genreService = genreService;
             _movieService = movieService;
-            _directorService = directorService;
 
             /* Can be uncommented and used for many to many relationships. ManyToManyRecord may be replaced with the related entiy name in the controller and views. */
             //_ManyToManyRecordService = ManyToManyRecordService;
         }
 
-        // GET: Movies
+        // GET: MovieGenres
         public IActionResult Index()
         {
             // Get collection service logic:
-            var list = _movieService.Query().ToList();
+            var list = _movieGenreService.Query().ToList();
             return View(list);
         }
 
-        // GET: Movies/Details/5
+        // GET: MovieGenres/Details/5
         public IActionResult Details(int id)
         {
             // Get item service logic:
-            var item = _movieService.Query().SingleOrDefault(q => q.Record.Id == id);
+            var item = _movieGenreService.Query().SingleOrDefault(q => q.Record.Id == id);
             return View(item);
         }
 
         protected void SetViewData()
         {
             // Related items service logic to set ViewData (Record.Id and Name parameters may need to be changed in the SelectList constructor according to the model):
-            ViewData["DirectorId"] = new SelectList(_directorService.Query().ToList(), "Record.Id", "Name");
-            ViewBag.DirectorId = new MultiSelectList(_directorService.Query().ToList(), "Record.Id", "Name");
+            ViewData["GenreId"] = new SelectList(_genreService.Query().ToList(), "Record.Id", "Name");
+            ViewData["MovieId"] = new SelectList(_movieService.Query().ToList(), "Record.Id", "Name");
             
             /* Can be uncommented and used for many to many relationships. ManyToManyRecord may be replaced with the related entiy name in the controller and views. */
             //ViewBag.ManyToManyRecordIds = new MultiSelectList(_ManyToManyRecordService.Query().ToList(), "Record.Id", "Name");
         }
 
-        // GET: Movies/Create
+        // GET: MovieGenres/Create
         public IActionResult Create()
         {
             SetViewData();
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: MovieGenres/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(MovieModel movie)
+        public IActionResult Create(MovieGenreModel movieGenre)
         {
             if (ModelState.IsValid)
             {
                 // Insert item service logic:
-                var result = _movieService.Create(movie.Record);
+                var result = _movieGenreService.Create(movieGenre.Record);
                 if (result.IsSuccessful)
                 {
                     TempData["Message"] = result.Message;
-                    return RedirectToAction(nameof(Details), new { id = movie.Record.Id });
+                    return RedirectToAction(nameof(Details), new { id = movieGenre.Record.Id });
                 }
                 ModelState.AddModelError("", result.Message);
             }
             SetViewData();
-            return View(movie);
+            return View(movieGenre);
         }
 
-        // GET: Movies/Edit/5
+        // GET: MovieGenres/Edit/5
         public IActionResult Edit(int id)
         {
             // Get item to edit service logic:
-            var item = _movieService.Query().SingleOrDefault(q => q.Record.Id == id);
+            var item = _movieGenreService.Query().SingleOrDefault(q => q.Record.Id == id);
             SetViewData();
             return View(item);
         }
 
-        // POST: Movies/Edit
+        // POST: MovieGenres/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(MovieModel movie)
+        public IActionResult Edit(MovieGenreModel movieGenre)
         {
             if (ModelState.IsValid)
             {
                 // Update item service logic:
-                var result = _movieService.Update(movie.Record);
+                var result = _movieGenreService.Update(movieGenre.Record);
                 if (result.IsSuccessful)
                 {
                     TempData["Message"] = result.Message;
-                    return RedirectToAction(nameof(Details), new { id = movie.Record.Id });
+                    return RedirectToAction(nameof(Details), new { id = movieGenre.Record.Id });
                 }
                 ModelState.AddModelError("", result.Message);
             }
             SetViewData();
-            return View(movie);
+            return View(movieGenre);
         }
 
-        // GET: Movies/Delete/5
+        // GET: MovieGenres/Delete/5
         public IActionResult Delete(int id)
         {
             // Get item to delete service logic:
-            var item = _movieService.Query().SingleOrDefault(q => q.Record.Id == id);
+            var item = _movieGenreService.Query().SingleOrDefault(q => q.Record.Id == id);
             return View(item);
         }
 
-        // POST: Movies/Delete
+        // POST: MovieGenres/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             // Delete item service logic:
-            var result = _movieService.Delete(id);
+            var result = _movieGenreService.Delete(id);
             TempData["Message"] = result.Message;
             return RedirectToAction(nameof(Index));
         }

@@ -2,6 +2,7 @@ using BLL.DAL;
 using BLL.Models;
 using BLL.Services;
 using BLL.Services.Bases;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using static BLL.Services.DirecorService;
 
@@ -16,7 +17,18 @@ builder.Services.AddDbContext<Db>(options => options.UseSqlServer(connectionStri
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IService<Movie, MovieModel>, MovieService>();
 builder.Services.AddScoped<IService<Director, DirectorModel>, DirectorService>();
+builder.Services.AddScoped<IService<Genre, GenreModel>, GenreService>();
+builder.Services.AddScoped<IService<MovieGenre, MovieGenreModel>, MovieGenreService>();
+builder.Services.AddScoped<IService<User, UserModel>, UserService>();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Users/Login";
+        options.LogoutPath = "/Users/Logout";
+        options.AccessDeniedPath = "/Home/Error";
+        options.ExpireTimeSpan = TimeSpan.FromHours(8);
+    });
 
 var app = builder.Build();
 

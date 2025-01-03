@@ -7,17 +7,15 @@ using System.Threading.Tasks;
 using BLL.DAL;
 
 namespace BLL.Models
-{
-    public class DirectorModel
-    {
-        public Director Record { get; set; }
 
+{
+    public class GenreModel
+    {
+        public Genre Record { get; set; }
         [DisplayName("Name")]
         public string Name => Record.Name;
-        public string Surname => Record.Surname;
-        [DisplayName("Surname")]
 
-        public string IsRetired => Record.IsRetired ? "Yes" : "No";
+
 
     }
 }

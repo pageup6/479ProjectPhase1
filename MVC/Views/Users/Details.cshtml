@@ -1,4 +1,4 @@
-﻿@model MovieModel
+﻿@model UserModel
 
 @* Generated from Custom Template. *@
 @* Model namespace using directive should be added to _ViewImports.cshtml. *@
@@ -7,8 +7,7 @@
     var containerDivClass = "container";
 }
 @{
-    ViewData["Title"] = "Movie Details";
-
+    ViewData["Title"] = "User Details";
 }
 
 <div class="@containerDivClass">
@@ -27,34 +26,34 @@
     }
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.UserName)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.UserName)
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
+            @Html.DisplayNameFor(model => model.Password)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
+            @Html.DisplayFor(model => model.Password)
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.TotalRevenue)
+            @Html.DisplayNameFor(model => model.IsActive)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.TotalRevenue)
+            @Html.DisplayFor(model => model.IsActive)
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-2 fw-bold">
-            @Html.DisplayNameFor(model => model.Director)
+                @Html.DisplayNameFor(model => model.RoleName)
         </div>
         <div class="col-10">
-            @Html.DisplayFor(model => model.Director)
+            @Html.DisplayFor(model => model.RoleId)
         </div>
     </div>
 
